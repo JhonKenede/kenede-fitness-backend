@@ -1,0 +1,190 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Goal {
+  DEFINITION
+  VOLUME
+  MAINTENANCE
+}
+
+enum Level {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum MuscleGroup {
+  CHEST
+  BACK
+  SHOULDERS
+  ARMS
+  LEGS
+  CORE
+  FULL_BODY
+}
+
+enum ExerciseType {
+  COMPOUND
+  ISOLATION
+}
+
+enum DayOfWeek {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+model User {
+  id           String    @id @default(uuid())
+  email        String    @unique
+  password     String
+  role         Role      @default(USER)
+  refreshToken String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  profile       Profile?
+  workouts      Workout[]
+  sessions      TrainingSession[]
+  metrics       BodyMetric[]
+  nutritionLogs NutritionLog[]
+}
+
+model Profile {
+  id          String   @id @default(uuid())
+  userId      String   @unique
+  firstName   String
+  lastName    String?
+  age         Int?
+  weight      Float? // kg
+  height      Float? // cm
+  goal        Goal?
+  level       Level    @default(BEGINNER)
+  injuries    String[]
+  daysPerWeek Int?
+  equipment   String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Exercise {
+  id           String       @id @default(uuid())
+  name         String
+  muscleGroup  MuscleGroup
+  videoUrl     String?
+  technique    String?
+  level        Level        @default(BEGINNER)
+  type         ExerciseType
+  equipment    String[]
+  instructions String?
+  createdAt    DateTime     @default(now())
+
+  workoutExercises WorkoutExercise[]
+  exerciseLogs     ExerciseLog[]
+}
+
+model Workout {
+  id           String      @id @default(uuid())
+  userId       String?
+  name         String
+  description  String?
+  isActive     Boolean     @default(true)
+  isTemplate   Boolean     @default(false)
+  category     String? // "CHEST", "BACK", "LEGS", "SHOULDERS", "ARMS", "CORE", "FULL_BODY"
+  dayOfWeek    DayOfWeek[]
+  muscleGroups String[]
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  user      User?             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  exercises WorkoutExercise[]
+  sessions  TrainingSession[]
+}
+
+model WorkoutExercise {
+  id         String  @id @default(uuid())
+  workoutId  String
+  exerciseId String
+  sets       Int
+  reps       Int
+  weight     Float?
+  restTime   Int? // segundos
+  order      Int
+
+  workout  Workout  @relation(fields: [workoutId], references: [id], onDelete: Cascade)
+  exercise Exercise @relation(fields: [exerciseId], references: [id])
+}
+
+model TrainingSession {
+  id          String   @id @default(uuid())
+  userId      String
+  workoutId   String?
+  date        DateTime @default(now())
+  duration    Int? // minutos
+  totalVolume Float? // kg totales
+  rpe         Int? // 1-10
+  notes       String?
+  completed   Boolean  @default(false)
+
+  user    User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workout Workout?    @relation(fields: [workoutId], references: [id])
+  logs    ExerciseLog[]
+}
+
+model ExerciseLog {
+  id         String  @id @default(uuid())
+  sessionId  String
+  exerciseId String
+  sets       Int
+  reps       Int
+  weight     Float?
+  rpe        Int?
+  notes      String?
+
+  session  TrainingSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  exercise Exercise        @relation(fields: [exerciseId], references: [id])
+}
+
+model BodyMetric {
+  id         String   @id @default(uuid())
+  userId     String
+  date       DateTime @default(now())
+  weight     Float?
+  bodyFat    Float?
+  muscleMass Float?
+  bmi        Float?
+  notes      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model NutritionLog {
+  id       String   @id @default(uuid())
+  userId   String
+  date     DateTime @default(now())
+  calories Float
+  protein  Float?
+  carbs    Float?
+  fat      Float?
+  water    Float? // litros
+  notes    String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
