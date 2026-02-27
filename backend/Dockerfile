@@ -1,15 +1,15 @@
-FROM node:20-alpine AS builder
+FROM node:20-slim AS builder
 WORKDIR /app
-RUN apk add --no-cache openssl
+RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
 COPY package*.json ./
 RUN npm ci
 COPY . .
 RUN npx prisma generate
 RUN npm run build
 
-FROM node:20-alpine AS production
+FROM node:20-slim AS production
 WORKDIR /app
-RUN apk add --no-cache openssl
+RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
 COPY package*.json ./
 RUN npm ci --only=production
 COPY --from=builder /app/dist ./dist
