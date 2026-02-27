@@ -14,7 +14,9 @@ async function bootstrap() {
   );
 
   app.enableCors({
-    origin: true, // permite cualquier origen en desarrollo
+    origin: process.env.FRONTEND_URL
+      ? [process.env.FRONTEND_URL, 'http://localhost:3000']
+      : true,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'bypass-tunnel-reminder'],
