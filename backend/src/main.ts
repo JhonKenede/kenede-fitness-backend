@@ -14,17 +14,12 @@ async function bootstrap() {
   );
 
   app.enableCors({
-    origin: [
-      "https://fitness-app-mocha-iota.vercel.app",
-      "http://localhost:3000",
-    ],
-    credentials: true,
+    origin: "*",
   });
+
   app.setGlobalPrefix("api");
 
-  const port = process.env.PORT || 3000;
-  await app.listen(port);
-  console.log(`Application running on port ${port}`);
+  await app.listen(process.env.PORT || 3000);
 }
 
 bootstrap();
