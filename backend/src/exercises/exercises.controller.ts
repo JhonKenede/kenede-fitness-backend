@@ -23,8 +23,9 @@ export class ExercisesController {
     @Query('muscleGroup') muscleGroup?: MuscleGroup,
     @Query('level') level?: Level,
     @Query('type') type?: ExerciseType,
+    @Query('search') search?: string,
   ) {
-    return this.exercisesService.findAll({ muscleGroup, level, type });
+    return this.exercisesService.findAll({ muscleGroup, level, type, search });
   }
 
   @Get(':id')

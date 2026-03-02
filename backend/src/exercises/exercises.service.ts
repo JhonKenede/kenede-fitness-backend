@@ -6,6 +6,7 @@ export interface ExerciseFilters {
   muscleGroup?: MuscleGroup;
   level?: Level;
   type?: ExerciseType;
+  search?: string;
 }
 
 @Injectable()
@@ -24,17 +25,19 @@ export class ExercisesService {
     if (filters.type) {
       where.type = filters.type;
     }
+    if (filters.search) {
+      where.name = {
+        contains: filters.search,
+        mode: 'insensitive',
+      };
+    }
 
     const exercises = await this.prisma.exercise.findMany({
       where,
       orderBy: [{ muscleGroup: 'asc' }, { name: 'asc' }],
     });
 
-    return {
-      success: true,
-      data: exercises,
-      message: 'Exercises retrieved',
-    };
+    return exercises;
   }
 
   async findOne(exerciseId: string) {
@@ -46,10 +49,6 @@ export class ExercisesService {
       throw new NotFoundException('Exercise not found');
     }
 
-    return {
-      success: true,
-      data: exercise,
-      message: 'Exercise retrieved',
-    };
+    return exercise;
   }
 }
