@@ -76,20 +76,40 @@ const exercises = [
   { name: 'Kettlebell swing', muscleGroup: MuscleGroup.FULL_BODY, type: ExerciseType.COMPOUND, level: Level.INTERMEDIATE, equipment: ['Kettlebell'], instructions: 'Impulso de cadera para lanzar la kettlebell hacia delante.' },
   { name: 'Power clean', muscleGroup: MuscleGroup.FULL_BODY, type: ExerciseType.COMPOUND, level: Level.ADVANCED, equipment: ['Barra'], instructions: 'Levanta la barra del suelo hasta los hombros de forma explosiva.' },
   { name: 'Thruster', muscleGroup: MuscleGroup.FULL_BODY, type: ExerciseType.COMPOUND, level: Level.INTERMEDIATE, equipment: ['Barra'], instructions: 'Combina sentadilla frontal y press militar.' },
+
+  // ── NUEVOS EJERCICIOS ────────────────────────────────
+  { name: 'Sentadilla sumo con barra', muscleGroup: MuscleGroup.LEGS, type: ExerciseType.COMPOUND, level: Level.INTERMEDIATE, equipment: ['Barra'], instructions: 'Pies más anchos que los hombros, puntas hacia fuera, baja controladamente.' },
+  { name: 'Curl femoral sentado', muscleGroup: MuscleGroup.LEGS, type: ExerciseType.ISOLATION, level: Level.BEGINNER, equipment: ['Máquina'], instructions: 'Sentado en la máquina, flexiona las rodillas contra la resistencia.' },
+  { name: 'Gemelos sentado', muscleGroup: MuscleGroup.LEGS, type: ExerciseType.ISOLATION, level: Level.BEGINNER, equipment: ['Máquina'], instructions: 'Sentado, eleva los talones para trabajar el sóleo.' },
+  { name: 'Remo T-bar', muscleGroup: MuscleGroup.BACK, type: ExerciseType.COMPOUND, level: Level.INTERMEDIATE, equipment: ['Barra T'], instructions: 'Agarra la barra T e inclina el torso, tira hacia el abdomen.' },
+  { name: 'Box squat', muscleGroup: MuscleGroup.LEGS, type: ExerciseType.COMPOUND, level: Level.INTERMEDIATE, equipment: ['Barra', 'Cajón'], instructions: 'Sentadilla con pausa en el cajón, ideal para fuerza explosiva.' },
+  { name: 'Patada trasera en polea', muscleGroup: MuscleGroup.LEGS, type: ExerciseType.ISOLATION, level: Level.BEGINNER, equipment: ['Polea'], instructions: 'De pie frente a la polea, extiende la pierna hacia atrás para trabajar glúteos.' },
+  { name: 'Abductor de cadera en máquina', muscleGroup: MuscleGroup.LEGS, type: ExerciseType.ISOLATION, level: Level.BEGINNER, equipment: ['Máquina'], instructions: 'Sentado, abre las piernas contra la resistencia.' },
+  { name: 'Patada de tríceps kickback', muscleGroup: MuscleGroup.ARMS, type: ExerciseType.ISOLATION, level: Level.BEGINNER, equipment: ['Mancuerna'], instructions: 'Inclinado, extiende el brazo hacia atrás para trabajar el tríceps.' },
+  { name: 'Curl concentrado sentado', muscleGroup: MuscleGroup.ARMS, type: ExerciseType.ISOLATION, level: Level.BEGINNER, equipment: ['Mancuerna'], instructions: 'Sentado, apoya el codo en la rodilla y curl con máxima concentración.' },
+  { name: 'Zancadas caminando', muscleGroup: MuscleGroup.LEGS, type: ExerciseType.COMPOUND, level: Level.BEGINNER, equipment: ['Mancuernas'], instructions: 'Da pasos largos alternando piernas, manteniendo el torso recto.' },
+  { name: 'Saltos verticales', muscleGroup: MuscleGroup.FULL_BODY, type: ExerciseType.COMPOUND, level: Level.BEGINNER, equipment: [], instructions: 'Desde cuclillas, salta lo más alto posible con los brazos arriba.' },
+  { name: 'Box jumps', muscleGroup: MuscleGroup.FULL_BODY, type: ExerciseType.COMPOUND, level: Level.INTERMEDIATE, equipment: ['Cajón'], instructions: 'Salta sobre el cajón aterrizando con ambos pies.' },
+  { name: 'Plancha con peso', muscleGroup: MuscleGroup.CORE, type: ExerciseType.COMPOUND, level: Level.INTERMEDIATE, equipment: ['Disco'], instructions: 'Plancha frontal con un disco sobre la espalda para mayor intensidad.' },
+  { name: 'Anti-rotación en polea', muscleGroup: MuscleGroup.CORE, type: ExerciseType.COMPOUND, level: Level.INTERMEDIATE, equipment: ['Polea'], instructions: 'Pallof press: extiende los brazos frente al pecho resistiendo la rotación.' },
+  { name: 'Extensión de cadera en polea', muscleGroup: MuscleGroup.LEGS, type: ExerciseType.ISOLATION, level: Level.BEGINNER, equipment: ['Polea'], instructions: 'De pie, extiende la cadera hacia atrás con la polea baja.' },
 ];
 
 async function main() {
-  const count = await prisma.exercise.count();
-  if (count > 0) {
-    console.log(`⏭️  Exercises already seeded (${count} found). Skipping.`);
-    return;
-  }
-
   console.log('🌱 Seeding exercises...');
+  let created = 0;
   for (const exercise of exercises) {
-    await prisma.exercise.create({ data: exercise });
+    const exists = await prisma.exercise.findFirst({ where: { name: exercise.name } });
+    if (!exists) {
+      await prisma.exercise.create({ data: exercise });
+      created++;
+    }
   }
-  console.log(`✅ ${exercises.length} exercises seeded successfully`);
+  if (created > 0) {
+    console.log(`✅ ${created} new exercises seeded successfully`);
+  } else {
+    console.log('⏭️  All exercises already exist. Skipping.');
+  }
 }
 
 main()
