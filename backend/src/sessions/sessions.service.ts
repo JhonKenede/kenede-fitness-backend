@@ -56,10 +56,27 @@ export class SessionsService {
   }
 
   async create(userId: string, dto: CreateSessionDto) {
-    // Auto-calculate totalVolume from logs if not explicitly provided
+    // Validate exercise log IDs against the DB — filter out invalid ones
+    let validLogs = dto.logs ?? [];
+    if (validLogs.length > 0) {
+      const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+      const validIds = validLogs.map((l) => l.exerciseId).filter((id) => uuidRegex.test(id));
+      if (validIds.length > 0) {
+        const existing = await this.prisma.exercise.findMany({
+          where: { id: { in: validIds } },
+          select: { id: true },
+        });
+        const existingSet = new Set(existing.map((e) => e.id));
+        validLogs = validLogs.filter((l) => existingSet.has(l.exerciseId));
+      } else {
+        validLogs = [];
+      }
+    }
+
+    // Auto-calculate totalVolume from valid logs if not explicitly provided
     let totalVolume = dto.totalVolume;
-    if (totalVolume === undefined && dto.logs && dto.logs.length > 0) {
-      totalVolume = dto.logs.reduce((sum, log) => {
+    if (totalVolume === undefined && validLogs.length > 0) {
+      totalVolume = validLogs.reduce((sum, log) => {
         return sum + log.sets * log.reps * (log.weight ?? 0);
       }, 0);
       totalVolume = Math.round(totalVolume * 100) / 100;
@@ -75,9 +92,9 @@ export class SessionsService {
         rpe: dto.rpe,
         notes: dto.notes,
         completed: dto.completed ?? true,
-        logs: dto.logs
+        logs: validLogs.length > 0
           ? {
-              create: dto.logs.map((log) => ({
+              create: validLogs.map((log) => ({
                 exerciseId: log.exerciseId,
                 sets: log.sets,
                 reps: log.reps,

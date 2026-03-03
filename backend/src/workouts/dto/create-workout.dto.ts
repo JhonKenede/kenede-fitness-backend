@@ -15,7 +15,7 @@ import { Type } from 'class-transformer';
 import { DayOfWeek } from '@prisma/client';
 
 export class WorkoutExerciseDto {
-  @IsUUID()
+  @IsString()
   exerciseId: string;
 
   @IsInt()

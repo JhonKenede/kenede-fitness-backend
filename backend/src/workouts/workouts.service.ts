@@ -69,6 +69,25 @@ export class WorkoutsService {
   }
 
   async create(userId: string, dto: CreateWorkoutDto) {
+    // Validate exercise IDs against the DB — filter out any that don't exist
+    // (handles fake IDs like "fb-c1" gracefully instead of crashing)
+    let validExercises: typeof dto.exercises = [];
+    if (dto.exercises && dto.exercises.length > 0) {
+      const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+      const validIds = dto.exercises
+        .map((ex) => ex.exerciseId)
+        .filter((id) => uuidRegex.test(id));
+
+      if (validIds.length > 0) {
+        const existingExercises = await this.prisma.exercise.findMany({
+          where: { id: { in: validIds } },
+          select: { id: true },
+        });
+        const existingSet = new Set(existingExercises.map((e) => e.id));
+        validExercises = dto.exercises.filter((ex) => existingSet.has(ex.exerciseId));
+      }
+    }
+
     const workout = await this.prisma.workout.create({
       data: {
         userId,
@@ -76,9 +95,9 @@ export class WorkoutsService {
         description: dto.description,
         dayOfWeek: dto.dayOfWeek ?? [],
         muscleGroups: dto.muscleGroups ?? [],
-        exercises: dto.exercises
+        exercises: validExercises.length > 0
           ? {
-              create: dto.exercises.map((ex) => ({
+              create: validExercises.map((ex) => ({
                 exerciseId: ex.exerciseId,
                 sets: ex.sets,
                 reps: ex.reps,
@@ -117,11 +136,23 @@ export class WorkoutsService {
       throw new ForbiddenException('Access denied');
     }
 
-    // If exercises are provided, replace all existing ones
+    // Validate exercise IDs if exercises are being updated
+    let validExercises: typeof dto.exercises = [];
     if (dto.exercises !== undefined) {
-      await this.prisma.workoutExercise.deleteMany({
-        where: { workoutId },
-      });
+      await this.prisma.workoutExercise.deleteMany({ where: { workoutId } });
+
+      if (dto.exercises.length > 0) {
+        const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+        const validIds = dto.exercises.map((ex) => ex.exerciseId).filter((id) => uuidRegex.test(id));
+        if (validIds.length > 0) {
+          const existing = await this.prisma.exercise.findMany({
+            where: { id: { in: validIds } },
+            select: { id: true },
+          });
+          const existingSet = new Set(existing.map((e) => e.id));
+          validExercises = dto.exercises.filter((ex) => existingSet.has(ex.exerciseId));
+        }
+      }
     }
 
     const updated = await this.prisma.workout.update({
@@ -131,9 +162,9 @@ export class WorkoutsService {
         description: dto.description,
         dayOfWeek: dto.dayOfWeek,
         muscleGroups: dto.muscleGroups,
-        exercises: dto.exercises
+        exercises: dto.exercises !== undefined && validExercises.length > 0
           ? {
-              create: dto.exercises.map((ex) => ({
+              create: validExercises.map((ex) => ({
                 exerciseId: ex.exerciseId,
                 sets: ex.sets,
                 reps: ex.reps,

@@ -15,7 +15,7 @@ import {
 import { Type } from 'class-transformer';
 
 export class ExerciseLogDto {
-  @IsUUID()
+  @IsString()
   exerciseId: string;
 
   @IsInt()
