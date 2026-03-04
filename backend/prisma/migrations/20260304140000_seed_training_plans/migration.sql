@@ -151,7 +151,7 @@ BEGIN
   -- Day 1: Push A
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'PPL Push A','Día 1 del plan Volumen PPL','CHEST',ARRAY['CHEST','SHOULDERS','ARMS'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'PPL Push A','Día 1 del plan Volumen PPL','CHEST',ARRAY['CHEST','SHOULDERS','ARMS'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_bench,4,8,150,1),(gen_random_uuid(),w,e_incline,4,10,90,2),
     (gen_random_uuid(),w,e_crossover,3,12,60,3),(gen_random_uuid(),w,e_mil_press,4,8,150,4),
@@ -162,7 +162,7 @@ BEGIN
   -- Day 2: Pull A
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'PPL Pull A','Día 2 del plan Volumen PPL','BACK',ARRAY['BACK','ARMS'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'PPL Pull A','Día 2 del plan Volumen PPL','BACK',ARRAY['BACK','ARMS'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_pullups,4,8,150,1),(gen_random_uuid(),w,e_bar_row,4,8,150,2),
     (gen_random_uuid(),w,e_cable_row,4,12,90,3),(gen_random_uuid(),w,e_pullover,3,12,60,4),
@@ -176,7 +176,7 @@ BEGIN
   -- Day 4: Legs
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'PPL Piernas','Día 4 del plan Volumen PPL','LEGS',ARRAY['LEGS'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'PPL Piernas','Día 4 del plan Volumen PPL','LEGS',ARRAY['LEGS'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_squat,5,8,150,1),(gen_random_uuid(),w,e_leg_press,4,12,120,2),
     (gen_random_uuid(),w,e_bulgarian,3,12,90,3),(gen_random_uuid(),w,e_leg_ext,3,15,60,4),
@@ -187,7 +187,7 @@ BEGIN
   -- Day 5: Push B
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'PPL Push B','Día 5 del plan Volumen PPL','CHEST',ARRAY['CHEST','SHOULDERS','ARMS'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'PPL Push B','Día 5 del plan Volumen PPL','CHEST',ARRAY['CHEST','SHOULDERS','ARMS'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_incline,4,10,120,1),(gen_random_uuid(),w,e_decline,3,10,90,2),
     (gen_random_uuid(),w,e_crossover,3,12,60,3),(gen_random_uuid(),w,e_db_shoulder,3,10,90,4),
@@ -204,7 +204,7 @@ BEGIN
 
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'UPL Upper A','Día 1 del plan Volumen UPL','CHEST',ARRAY['CHEST','BACK','SHOULDERS'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'UPL Upper A','Día 1 del plan Volumen UPL','CHEST',ARRAY['CHEST','BACK','SHOULDERS'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_bench,5,6,180,1),(gen_random_uuid(),w,e_bar_row,5,6,180,2),
     (gen_random_uuid(),w,e_lat_pull,3,8,150,3),(gen_random_uuid(),w,e_incline,3,10,120,4),
@@ -213,7 +213,7 @@ BEGIN
 
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'UPL Piernas','Día 2 del plan Volumen UPL','LEGS',ARRAY['LEGS'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'UPL Piernas','Día 2 del plan Volumen UPL','LEGS',ARRAY['LEGS'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_squat,4,8,150,1),(gen_random_uuid(),w,e_rdl,4,10,90,2),
     (gen_random_uuid(),w,e_leg_press,3,12,90,3),(gen_random_uuid(),w,e_hip_thrust,3,12,90,4),
@@ -222,7 +222,7 @@ BEGIN
 
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'UPL Upper B','Día 3 del plan Volumen UPL','SHOULDERS',ARRAY['SHOULDERS','ARMS'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'UPL Upper B','Día 3 del plan Volumen UPL','SHOULDERS',ARRAY['SHOULDERS','ARMS'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_mil_press,4,8,120,1),(gen_random_uuid(),w,e_db_flat,3,10,90,2),
     (gen_random_uuid(),w,e_lat_raise,4,12,60,3),(gen_random_uuid(),w,e_bar_curl,3,10,90,4),
@@ -231,7 +231,7 @@ BEGIN
 
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'UPL Espalda','Día 4 del plan Volumen UPL','BACK',ARRAY['BACK'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'UPL Espalda','Día 4 del plan Volumen UPL','BACK',ARRAY['BACK'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_lat_pull,4,10,90,1),(gen_random_uuid(),w,e_cable_row,4,12,90,2),
     (gen_random_uuid(),w,e_pullover,3,12,60,3),(gen_random_uuid(),w,e_tbar_row,3,10,90,4),
@@ -247,7 +247,7 @@ BEGIN
 
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'DEF Push','Día 1 del plan Definición PPL','CHEST',ARRAY['CHEST','SHOULDERS','ARMS'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'DEF Push','Día 1 del plan Definición PPL','CHEST',ARRAY['CHEST','SHOULDERS','ARMS'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_db_flat,4,15,60,1),(gen_random_uuid(),w,e_crossover,4,15,45,2),
     (gen_random_uuid(),w,e_chest_mach,3,15,60,3),(gen_random_uuid(),w,e_db_shoulder,3,12,60,4),
@@ -257,7 +257,7 @@ BEGIN
 
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'DEF Pull','Día 2 del plan Definición PPL','BACK',ARRAY['BACK','ARMS'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'DEF Pull','Día 2 del plan Definición PPL','BACK',ARRAY['BACK','ARMS'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_lat_pull,4,15,45,1),(gen_random_uuid(),w,e_cable_row,4,15,45,2),
     (gen_random_uuid(),w,e_pullover,3,15,30,3),(gen_random_uuid(),w,e_cable_curl,3,15,30,4),
@@ -268,7 +268,7 @@ BEGIN
 
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'DEF Piernas','Día 4 del plan Definición PPL','LEGS',ARRAY['LEGS'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'DEF Piernas','Día 4 del plan Definición PPL','LEGS',ARRAY['LEGS'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_goblet,4,15,60,1),(gen_random_uuid(),w,e_walk_lunges,4,20,45,2),
     (gen_random_uuid(),w,e_leg_ext,4,15,45,3),(gen_random_uuid(),w,e_seated_curl,4,15,45,4),
@@ -278,7 +278,7 @@ BEGIN
 
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'DEF Cardio & Core','Día 5 del plan Definición PPL','CORE',ARRAY['CORE'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'DEF Cardio & Core','Día 5 del plan Definición PPL','CORE',ARRAY['CORE'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_plank,3,60,60,1),(gen_random_uuid(),w,e_russian,3,20,45,2),
     (gen_random_uuid(),w,e_leg_raises,3,15,45,3),(gen_random_uuid(),w,e_burpees,4,10,60,4);
@@ -293,7 +293,7 @@ BEGIN
 
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'CONJ Máximo Esfuerzo','Día 1 del plan Fuerza Conjugada','CHEST',ARRAY['CHEST','BACK','ARMS'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'CONJ Máximo Esfuerzo','Día 1 del plan Fuerza Conjugada','CHEST',ARRAY['CHEST','BACK','ARMS'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_bench,6,2,240,1),(gen_random_uuid(),w,e_bar_row,3,5,180,2),
     (gen_random_uuid(),w,e_dips_chest,3,5,120,3);
@@ -301,7 +301,7 @@ BEGIN
 
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'CONJ Dinámico Lower','Día 2 del plan Fuerza Conjugada','LEGS',ARRAY['LEGS','CORE'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'CONJ Dinámico Lower','Día 2 del plan Fuerza Conjugada','LEGS',ARRAY['LEGS','CORE'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_squat,8,2,120,1),(gen_random_uuid(),w,e_deadlift,3,3,180,2),
     (gen_random_uuid(),w,e_leg_press,3,6,90,3),(gen_random_uuid(),w,e_plank,3,45,60,4);
@@ -309,7 +309,7 @@ BEGIN
 
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'CONJ Repeticiones','Día 3 del plan Fuerza Conjugada','BACK',ARRAY['BACK','LEGS'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'CONJ Repeticiones','Día 3 del plan Fuerza Conjugada','BACK',ARRAY['BACK','LEGS'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_deadlift,5,5,150,1),(gen_random_uuid(),w,e_tbar_row,4,6,120,2),
     (gen_random_uuid(),w,e_goblet,3,5,120,3);
@@ -317,7 +317,7 @@ BEGIN
 
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'CONJ Asistencia','Día 4 del plan Fuerza Conjugada','SHOULDERS',ARRAY['SHOULDERS','BACK','ARMS'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'CONJ Asistencia','Día 4 del plan Fuerza Conjugada','SHOULDERS',ARRAY['SHOULDERS','BACK','ARMS'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_front_raise,3,8,90,1),(gen_random_uuid(),w,e_cable_row,3,10,90,2),
     (gen_random_uuid(),w,e_bar_curl,3,8,60,3);
@@ -332,7 +332,7 @@ BEGIN
 
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'GLUT Glúteos A','Día 1 del plan Volumen Glúteos','LEGS',ARRAY['LEGS'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'GLUT Glúteos A','Día 1 del plan Volumen Glúteos','LEGS',ARRAY['LEGS'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_hip_thrust,4,8,120,1),(gen_random_uuid(),w,e_sumo_squat,4,10,90,2),
     (gen_random_uuid(),w,e_rdl,3,12,90,3),(gen_random_uuid(),w,e_bulgarian,3,10,60,4),
@@ -341,7 +341,7 @@ BEGIN
 
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'GLUT Torso','Día 2 del plan Volumen Glúteos','CHEST',ARRAY['CHEST','BACK','SHOULDERS','ARMS'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'GLUT Torso','Día 2 del plan Volumen Glúteos','CHEST',ARRAY['CHEST','BACK','SHOULDERS','ARMS'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_db_flat,3,12,60,1),(gen_random_uuid(),w,e_cable_row,3,12,60,2),
     (gen_random_uuid(),w,e_crossover,3,15,45,3),(gen_random_uuid(),w,e_lat_pull,3,12,60,4),
@@ -353,7 +353,7 @@ BEGIN
 
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'GLUT Glúteos B','Día 4 del plan Volumen Glúteos','LEGS',ARRAY['LEGS'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'GLUT Glúteos B','Día 4 del plan Volumen Glúteos','LEGS',ARRAY['LEGS'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_goblet,4,15,60,1),(gen_random_uuid(),w,e_hip_thrust,4,15,45,2),
     (gen_random_uuid(),w,e_walk_lunges,3,20,45,3),(gen_random_uuid(),w,e_leg_ext,3,15,45,4),
@@ -370,7 +370,7 @@ BEGIN
 
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'FDEF Glúteos','Día 1 del plan Definición Femenina','LEGS',ARRAY['LEGS'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'FDEF Glúteos','Día 1 del plan Definición Femenina','LEGS',ARRAY['LEGS'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_hip_thrust,4,15,90,1),(gen_random_uuid(),w,e_goblet,3,15,60,2),
     (gen_random_uuid(),w,e_bulgarian,3,12,60,3),(gen_random_uuid(),w,e_kickback_gl,3,20,45,4),
@@ -379,7 +379,7 @@ BEGIN
 
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'FDEF Torso Push','Día 2 del plan Definición Femenina','CHEST',ARRAY['CHEST','SHOULDERS','ARMS'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'FDEF Torso Push','Día 2 del plan Definición Femenina','CHEST',ARRAY['CHEST','SHOULDERS','ARMS'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_db_flat,4,12,45,1),(gen_random_uuid(),w,e_crossover,3,15,30,2),
     (gen_random_uuid(),w,e_chest_mach,3,15,45,3),(gen_random_uuid(),w,e_db_shoulder,3,12,60,4),
@@ -390,7 +390,7 @@ BEGIN
 
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'FDEF Piernas','Día 4 del plan Definición Femenina','LEGS',ARRAY['LEGS'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'FDEF Piernas','Día 4 del plan Definición Femenina','LEGS',ARRAY['LEGS'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_goblet,4,15,60,1),(gen_random_uuid(),w,e_leg_ext,4,15,45,2),
     (gen_random_uuid(),w,e_walk_lunges,3,20,45,3),(gen_random_uuid(),w,e_seated_curl,4,15,45,4),
@@ -399,7 +399,7 @@ BEGIN
 
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'FDEF Espalda','Día 5 del plan Definición Femenina','BACK',ARRAY['BACK','ARMS'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'FDEF Espalda','Día 5 del plan Definición Femenina','BACK',ARRAY['BACK','ARMS'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_lat_pull,4,15,45,1),(gen_random_uuid(),w,e_cable_row,4,15,45,2),
     (gen_random_uuid(),w,e_pullover,3,15,30,3),(gen_random_uuid(),w,e_cable_curl,3,15,30,4),
@@ -415,7 +415,7 @@ BEGIN
 
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'FSTR Lower A','Día 1 del plan Fuerza Femenina','LEGS',ARRAY['LEGS'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'FSTR Lower A','Día 1 del plan Fuerza Femenina','LEGS',ARRAY['LEGS'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_squat,5,5,150,1),(gen_random_uuid(),w,e_box_squat,3,5,120,2),
     (gen_random_uuid(),w,e_rdl,3,8,90,3),(gen_random_uuid(),w,e_hip_ext_cab,2,10,60,4);
@@ -423,7 +423,7 @@ BEGIN
 
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'FSTR Upper','Día 2 del plan Fuerza Femenina','CHEST',ARRAY['CHEST','BACK','SHOULDERS','ARMS'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'FSTR Upper','Día 2 del plan Fuerza Femenina','CHEST',ARRAY['CHEST','BACK','SHOULDERS','ARMS'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_bench,5,5,150,1),(gen_random_uuid(),w,e_bar_row,5,5,150,2),
     (gen_random_uuid(),w,e_mil_press,3,6,120,3),(gen_random_uuid(),w,e_lat_pull,3,6,120,4),
@@ -432,7 +432,7 @@ BEGIN
 
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'FSTR Lower B','Día 3 del plan Fuerza Femenina','LEGS',ARRAY['LEGS'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'FSTR Lower B','Día 3 del plan Fuerza Femenina','LEGS',ARRAY['LEGS'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_hip_thrust,5,5,150,1),(gen_random_uuid(),w,e_sumo_squat,4,8,120,2),
     (gen_random_uuid(),w,e_deadlift,3,5,150,3),(gen_random_uuid(),w,e_vert_jump,4,5,120,4);
@@ -440,7 +440,7 @@ BEGIN
 
   w := gen_random_uuid();
   INSERT INTO "Workout"(id,name,description,category,"muscleGroups","isTemplate","isActive","dayOfWeek","createdAt","updatedAt")
-  VALUES(w,'FSTR Pliometría','Día 4 del plan Fuerza Femenina','FULL_BODY',ARRAY['LEGS','CORE'],true,true,ARRAY[]::text[],NOW(),NOW());
+  VALUES(w,'FSTR Pliometría','Día 4 del plan Fuerza Femenina','FULL_BODY',ARRAY['LEGS','CORE'],true,true,ARRAY[]::"DayOfWeek"[],NOW(),NOW());
   INSERT INTO "WorkoutExercise"(id,"workoutId","exerciseId",sets,reps,"restTime","order") VALUES
     (gen_random_uuid(),w,e_burpees,5,5,120,1),(gen_random_uuid(),w,e_box_jump,4,10,60,2),
     (gen_random_uuid(),w,e_weighted_plk,3,20,60,3),(gen_random_uuid(),w,e_pallof,3,10,60,4);

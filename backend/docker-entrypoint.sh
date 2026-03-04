@@ -8,6 +8,7 @@ echo "--- Resolving any failed migrations ---"
 # If a migration was previously marked as failed, mark it as rolled-back
 # so the fixed version can be re-applied cleanly
 npx prisma migrate resolve --rolled-back "20260303120000_seed_workout_templates" 2>/dev/null || true
+npx prisma migrate resolve --rolled-back "20260304140000_seed_training_plans" 2>/dev/null || true
 
 echo "--- Running migrations ---"
 npx prisma migrate deploy
