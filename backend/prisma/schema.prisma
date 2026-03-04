@@ -52,7 +52,8 @@ enum DayOfWeek {
 model User {
   id           String    @id @default(uuid())
   email        String    @unique
-  password     String
+  password     String?   // nullable — Google users don't have password
+  googleId     String?   @unique
   role         Role      @default(USER)
   refreshToken String?
   createdAt    DateTime  @default(now())
