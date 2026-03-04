@@ -15,5 +15,8 @@ npx prisma migrate deploy
 echo "--- Seeding exercises ---"
 npx ts-node prisma/seed.ts 2>/dev/null || echo '--- Seed skipped (already done or ts-node unavailable) ---'
 
+echo "--- Seeding training plans ---"
+npx ts-node prisma/seed-plans.ts 2>/dev/null || echo '--- Plans seed skipped ---'
+
 echo "--- Starting app ---"
 exec node /app/dist/src/main.js

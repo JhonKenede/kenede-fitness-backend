@@ -10,6 +10,7 @@ import { SessionsModule } from './sessions/sessions.module';
 import { MetricsModule } from './metrics/metrics.module';
 import { NutritionModule } from './nutrition/nutrition.module';
 import { GroupsModule } from './groups/groups.module';
+import { PlansModule } from './plans/plans.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { GroupsModule } from './groups/groups.module';
     MetricsModule,
     NutritionModule,
     GroupsModule,
+    PlansModule,
   ],
 })
 export class AppModule {}

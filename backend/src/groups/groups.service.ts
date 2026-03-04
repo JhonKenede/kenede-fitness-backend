@@ -140,7 +140,7 @@ export class GroupsService {
       include: {
         workout: {
           include: {
-            exercises: { include: { exercise: true }, orderBy: { order: 'asc' } },
+            exercises: { include: { exercise: true }, orderBy: { order: 'asc' as const } },
           },
         },
         progress: {
@@ -179,7 +179,7 @@ export class GroupsService {
       data: { groupId, workoutId: dto.workoutId, addedById: userId },
       include: {
         workout: {
-          include: { exercises: { include: { exercise: true }, orderBy: { order: 'asc' } } },
+          include: { exercises: { include: { exercise: true }, orderBy: { order: 'asc' as const } } },
         },
       },
     });
@@ -312,7 +312,7 @@ export class GroupsService {
       workouts: {
         include: {
           workout: {
-            include: { exercises: { include: { exercise: true }, orderBy: { order: 'asc' } } },
+            include: { exercises: { include: { exercise: true }, orderBy: { order: 'asc' as const } } },
           },
         },
       },
